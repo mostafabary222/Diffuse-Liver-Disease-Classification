@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <!-- build:css css/main.css -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- endbuild -->
+
+    <title>View Patient</title>
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="./index.html"><img src="img/gradLogo.png" alt="Logo" height="40" width="60"></a>
+            <div class="collapse navbar-collapse" id="Navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><span class="fa fa-home fa-lg"></span> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-info fa-lg"></span> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contactus.html"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
+                </ul>
+                <span class="navbar-text">
+                    <a id="loginButton">
+                        <span class="fa fa-sign-in"></span> Login
+                    </a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign In</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-sm-4">
+                                <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                                <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" placeholder="E-mail">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label class="sr-only" for="exampleInputPassword3">Password</label>
+                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary btn-sm ml-1">Sign in</button>        
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="breadcrumb">
+        <div class="row">
+            <ol class="col-12 breadcrumb">
+               <li class="breadcrumb-item"><a href="patients.html">Patients</a></li>
+               <li class="breadcrumb-item active">Patient Name</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row row-content">
+    <div class="col-md-6">
+        <div class="card">
+            <h3 class="card-header  text-black">Patient Information</h3>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-6">Name</dt>
+                    <dd class="col-6">Name</dd>
+                    <dt class="col-6">Mobile No.</dt>
+                    <dd class="col-6">Mobile No.</dd>
+                    <dt class="col-6"></dt>
+                    <dd class="col-6"></dd>
+                    <dt class="col-6"></dt>
+                    <dd class="col-6"></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <h3 class="card-header text-black">Past Appointments</h3>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-6">Name</dt>
+                    <dd class="col-6">Name</dd>
+                    <dt class="col-6">Date</dt>
+                    <dd class="col-6">Date</dd>
+                    <dt class="col-6"></dt>
+                    <dd class="col-6"></dd>
+                    <dt class="col-6"></dt>
+                    <dd class="col-6"></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <h3 class="card-header text-black">Reports</h3>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-6"></dt>
+                <dd class="col-6"></dd>
+                <dt class="col-6"></dt>
+                <dd class="col-6"></dd>
+                <dt class="col-6"></dt>
+                <dd class="col-6"></dd>
+                <dt class="col-6"></dt>
+                <dd class="col-6"></dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div class="row row-content">
+<div class="col-md-10 mt-5">
+    <button type="submit" class="btn btn-primary">Generate Report</button>
+</div>
+<div class="col-md-2 mt-5">
+    <button type="submit" class="btn btn-danger">Archive Patient</button>
+</div>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+<script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+
+</html>

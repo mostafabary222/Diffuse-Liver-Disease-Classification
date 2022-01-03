@@ -1,0 +1,58 @@
+.row-header {
+  margin: 0px auto;
+  padding: 0px 0px; }
+  
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px;
+  border-bottom: 1px ridge;
+  min-height: 400px; }
+  
+body {
+  padding: 50px 0px 0px 0px;
+  background-color: #0a836f;
+  z-index: 0; }
+  
+.navbar-dark {
+  background-color: #181717; }
+  
+.modal-header {
+  background: #4e5eee; }
+  .modal-header button {
+    color: floralwhite; }
+  
+.modal-body {
+  background: #27b2f3; }
+
+#container {
+  color: black;
+  background: #007888;
+}
+
+.card {
+  color: #007888;
+}
+
+.card-header {
+  border-bottom: 1.5px solid rgb(158, 158, 158);
+  margin-bottom: 10px; 
+}
+
+.breadcrumb {
+  margin-top: 10px;
+  background-color: rgba(158, 158, 158);
+ 
+}
+
+a {
+  color: #000000;
+}
+
+a:hover {
+  color: #000000;
+}
+
+.breadcrumb-item.active {
+  color: #000000;
+}
+  
