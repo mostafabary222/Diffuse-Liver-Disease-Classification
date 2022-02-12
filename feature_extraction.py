@@ -31,19 +31,17 @@ def extract_roi(img, start , size = (32,32)):
     return roi, mask
 
 
-def feature_extraction(img):
-    roi_pos = [
-        (160, 230),
-        (118, 224),
-        (241, 151),
-        (120, 420),
-        (170, 300),
-        (400, 200),
-        (300, 120),
-        (240, 240),
-        (360, 160)
-    ]
-
+def feature_extraction(img, roi_pos=[
+    (160, 230),
+    (118, 224),
+    (241, 151),
+    (120, 420),
+    (170, 300),
+    (400, 200),
+    (300, 120),
+    (240, 240),
+    (360, 160)
+]):
     roi_mask_arr = []
     for pos in roi_pos:
         roi_mask_arr.append(extract_roi(img, pos))
@@ -70,9 +68,8 @@ def feature_extraction(img):
     }
 
     feat_arr = []
-
     for roi, mask in roi_mask_arr:
-        if 0 in roi or roi.shape != (32,32):
+        if roi.shape != (32, 32):
             continue
         features = {}
 
@@ -89,10 +86,12 @@ def feature_extraction(img):
             features[f'correlation_{da_dict[j]}'] = corr[j]
 
         features[f'entropy'] = shannon_entropy(roi)
-
-        feat, labels = pyfeats.glrlm_features(img, mask, 256)
-        for i in range(len(labels)):
-            features[labels[i]] = feat[i]
+        # features[f'var'] = np.var(roi)
+        # features[f'mean'] = np.mean(roi)
+        # GLRLM Features
+        #         feat, labels = pyfeats.glrlm_features(img, mask, 256)
+        #         for i in range(len(labels)):
+        #             features[labels[i]] = feat[i]
         #         glrlm = {l : f for l,f in zip(labels,feat)}
         #         features[f'longRunEmphasis'] = glrlm['GLRLM_LongRunEmphasis']
         #         features[f'runPercentage'] = glrlm['GLRLM_RunPercentage']
@@ -116,8 +115,8 @@ def build_dataframe(images):
     # column name roiNum_feature
     data = pd.DataFrame()
 
-    for img, cls in images:
-        feat_arr = feature_extraction(img)
+    for img, cls, mask in images:
+        feat_arr = feature_extraction(img, mask)
         for row in feat_arr:
             row['target'] = cls
             data = data.append(row,ignore_index=True)
