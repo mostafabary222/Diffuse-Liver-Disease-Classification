@@ -90,34 +90,34 @@ def feature_extraction(img, roi_pos):
 
         features[f'entropy'] = shannon_entropy(roi)
 
-        features[f'mean'] = np.mean(roi)
-        features[f'variance'] = np.var(roi)
+        # features[f'mean'] = np.mean(roi)
+        # features[f'variance'] = np.var(roi)
 
         # pyradiomics
-        # mask = sitk.GetImageFromArray(mask)
-        # # First Order features
-        # firstOrderFeatures = firstorder.RadiomicsFirstOrder(img, mask)
-        # # firstOrderFeatures.enableFeatureByName('Mean', True)
-        # firstOrderFeatures.enableAllFeatures()
-        # results = firstOrderFeatures.execute()
-        # for col in results.keys():
-        #     features[col] = results[col].item()
+        mask = sitk.GetImageFromArray(mask)
+        # First Order features
+        firstOrderFeatures = firstorder.RadiomicsFirstOrder(img, mask)
+        # firstOrderFeatures.enableFeatureByName('Mean', True)
+        firstOrderFeatures.enableAllFeatures()
+        results = firstOrderFeatures.execute()
+        for col in results.keys():
+            features[col] = results[col].item()
 
         # GLCM features
-        # glcmFeatures = glcm.RadiomicsGLCM(img, mask)
-        # glcmFeatures.enableAllFeatures()
-        # results = glcmFeatures.execute()
-        # for col in results.keys():
-        #     features[col] = results[col].item()
+        glcmFeatures = glcm.RadiomicsGLCM(img, mask)
+        glcmFeatures.enableAllFeatures()
+        results = glcmFeatures.execute()
+        for col in results.keys():
+            features[col] = results[col].item()
         #
         # GLRLM features
-        # glrlmFeatures = glrlm.RadiomicsGLRLM(img, mask)
-        # glrlmFeatures.enableAllFeatures()
-        # results = glrlmFeatures.execute()
-        # features['LongRunEmphasis'] = results['LongRunEmphasis'].item()
-        # features['RunPercentage'] = results['RunPercentage'].item()
-        # for col in results.keys():
-        #     features[col] = results[col].item()
+        glrlmFeatures = glrlm.RadiomicsGLRLM(img, mask)
+        glrlmFeatures.enableAllFeatures()
+        results = glrlmFeatures.execute()
+        features['LongRunEmphasis'] = results['LongRunEmphasis'].item()
+        features['RunPercentage'] = results['RunPercentage'].item()
+        for col in results.keys():
+            features[col] = results[col].item()
 
         feat_arr.append(features)
 
