@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Liver Disease Classification</title>
+</head>
+
+<body>
+    
+    <div class="row row-content">
+        <div class="col-md-6">
+            <div class="card">
+                <h3 class="card-header  text-black">Report</h3>
+                <div class="card-body">
+                    <dl class="row">
+                        <form class="col-4 col-sm col-md-6">
+                            {% csrf_token %}
+                        <dt class="col-6">Name</dt>
+                        <dd class="col-6">{{patient.patient_name}}</dd>
+                        <dt class="col-6">Diagnosis</dt>
+                        <dd class="col-6">
+                            {% if 'report' in request.session %}
+                            <input type="text" value="{{request.session.report}}">
+                            {% else %}
+                            <input type="text" value="">
+                            {% endif %}
+                        </dd>
+                        <dt class="col-6">Notes and Comments</dt>
+                        <dd class="col-6">
+                            <textarea name="text" cols="30" rows="5">
+                            </textarea>
+                        </dd>
+                        <dd class="col-6 mt-2">
+                            {% if 'report' in request.session %}
+                            <input name="form" type="submit">
+                            {% endif %}
+                        </form>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+        <div class="card">
+            <h3 class="card-header  text-black">Upload Image</h3>
+            <div class="card-body">
+                <dl class="row">
+                <form class="col-4 col-sm col-md-6 mt-2" method="post">
+                    {% csrf_token %}
+                    <input name="file" type="file">
+                    <input name="image" type="submit">
+                </form>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+
+    </div>   
+</body>
+
+
+</html>
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Liver Disease Classification</title>
+</head>
+
+<body>
+
+<div class="row row-content align-items-center">
+    <div class="col"></div>
+    <div class="col-6 col-sm-9 align-items-center">
+        <h2>Doctors</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Full Name</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                {% for doctor in doctors %}
+                <tbody>
+                    <tr>
+                        <th>{{doctor.name}}</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><a href="{% url 'deletedoctor' doctor.id %}"><span class="fa fa-trash fa-lg"></span></a></th>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col"></div>
+    <div class="col-md-10 mt-5">
+        <a href="{% url 'adddoctor' %}">
+        <button onclick="" type="submit" class="btn btn-primary">Add Doctor</button>
+        </a>
+    </div>
+</div>
+
+
+
+</body>
+
+</html>
+
+{% endblock content %}
