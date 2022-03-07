@@ -1,0 +1,116 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Liver Disease Classification</title>
+</head>
+
+<body id="body">
+
+    <div class="container" id="breadcrumb">
+        <div class="row">
+            <ol class="col-12 breadcrumb">
+               <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+               <li class="breadcrumb-item active">My Profile</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row row-content">
+        
+    <div class="col-md-6">
+        <div class="card">
+            <h3 class="card-header  text-black">{{patient.patient_name}}</h3>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-6">Full Name</dt>
+                    <dd class="col-6">{{patient.patient_name}}</dd>
+                    <dt class="col-6">Username</dt>
+                    <dd class="col-6">{{patient.username}}</dd>
+                    <dt class="col-6">Assigned Doctor</dt>
+                    <dd class="col-6">{{patient.assigned_doctor}}</dd>
+                    <dt class="col-6">Phone No.</dt>
+                    <dd class="col-6">{{patient.phone_num}}</dd>
+                    <dt class="col-6">Birth Date</dt>
+                    <dd class="col-6">{{patient.birth_date}}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- <h4>Reports</h4> -->
+    
+    <div class="table-responsive col-md-6">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Report ID</th>
+                    <th>Patient Name</th>
+                    <th>Pathologist</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            {% for report in reports %}
+            <tbody>
+                <tr>
+                    <th>{{report.id}}</th>
+                    {% if request.session.role == 'admin' %}
+                    <th>{{report.patient_name}}</th>
+                    {% else %}
+                    <th><a href = "{% url 'report' report.id %}">{{report.patient_name}}</a></th>
+                    {% endif %}
+                    <th>{{report.pathologist}}</th>
+                    <th>{{report.date}}</th>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    {% if request.session.role == 'doctor'%}
+    <div class="col-md-10 mt-5">
+        <a href="{% url 'addreport' patient.patient_name %}">
+            <button onclick="" type="submit" class="btn btn-primary">Generate Report</button>
+        </a>
+    </div>
+    <form action="post">
+    <div class="col-md-2 mt-5">
+        <button onclick="" type="submit" class="btn btn-danger">Archive Patient</button>
+    </div>
+    </form>
+</div>
+    {% endif %}
+
+    {% if request.session.role == 'admin'%}
+    <div class="row row-content">
+        <form method="post">
+            {% csrf_token %}
+            <div class="col-md-5 ">
+                <button type="button" onclick="generatePassword()" class="btn btn-success">Generate Password</button>
+            </div>
+            <div class="col-md-7 mt-1">
+                <input id="pass" name="pass" type="text" readonly="true" value="New Password">
+                <a id="copy" href="#" hidden>
+                    <button type="button" onclick="copyPassword()"><span class="fa fa-copy fa-lg"></span></button>
+                </a>
+                <a id="save" href="#" hidden>
+                    <button type="submit"><span class="fa fa-save fa-lg"></span></button>
+                </a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</body>
+
+</html>
+
+{% endblock content %}

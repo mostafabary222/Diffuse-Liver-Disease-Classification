@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Liver Disease Classification</title>
+</head>
+
+<body>
+
+<div class="row row-content align-items-center">
+    <div class="col"></div>
+    <div class="col-6 col-sm-9 align-items-center">
+        <h2>Patients</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Phone No.</th>
+                        <th>Birth Date</th>
+                    </tr>
+                </thead>
+                {% for patient in patients %}
+                <tbody>
+                    <tr>
+                        <th><a href="{{patient.patient_name}}">{{patient.patient_name}}</a></th>
+                        <th>{{patient.phone_num}}</th>
+                        <th>{{patient.birth_date}}</th>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col"></div>
+    {% if request.session.role == 'doctor'%}
+    <div class="col-md-12 mt-5 align-items-center">
+        <a href="{% url 'addpatient' %}">
+        <button onclick="" type="submit" class="btn btn-primary">Add Patient</button>
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+
+
+</body>
+
+</html>
+
+{% endblock content %}

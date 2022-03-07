@@ -38,6 +38,30 @@ def read_images(folder = "dataset/train",
     return images
 
 
+def get_length(img, mask):
+    # top right, bottom left
+    tr_distance = []
+    bl_distance = []
+
+    # top left, bottom right
+    tl_distance = []
+    br_distance = []
+
+    for x, y in mask:
+        tr_distance.append(math.dist([0, img.shape[1]], [x + 32, y]))
+        bl_distance.append(math.dist([img.shape[0], 0], [x, y + 32]))
+
+        tl_distance.append(math.dist([0, 0], [x, y]))
+        br_distance.append(math.dist(img.shape, [x + 32, y + 32]))
+
+    top_right = mask[tr_distance.index(min(tr_distance))]
+    bottom_left = mask[bl_distance.index(min(bl_distance))]
+
+    top_left = mask[tl_distance.index(min(tl_distance))]
+    bottom_right = mask[br_distance.index(min(br_distance))]
+
+    return max(math.dist(top_right, bottom_left), math.dist(top_left, bottom_right))
+
 def extract_roi(img, start , size = (32,32)):
     img = sitk.GetArrayFromImage(img)
     roi = img[start[0]:start[0]+size[0],start[1]:start[1]+size[1]]
@@ -72,6 +96,8 @@ def feature_extraction(img, roi_pos):
 
     }
 
+    length = get_length(sitk.GetArrayFromImage(img), roi_pos)
+
     feat_arr = []
     for roi, mask in roi_mask_arr:
         features = {}
@@ -89,6 +115,8 @@ def feature_extraction(img, roi_pos):
             features[f'correlation_{da_dict[j]}'] = corr[j]
 
         features[f'entropy'] = shannon_entropy(roi)
+
+        features['length'] = length
 
         # features[f'mean'] = np.mean(roi)
         # features[f'variance'] = np.var(roi)
